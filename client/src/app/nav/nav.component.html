@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" [routerLink]="['']">DatingApp</a>
+
+  <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$ | async">
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['matches']"
+        >Matches
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['lists']"
+        >Lists</a
+      >
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['messages']"
+        >Messages</a
+      >
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" (click)="logout()"
+        >Logout</a
+      >
+    </li> -->
+  </ul>
+
+  <div
+    class="dropdown mr-2"
+    *ngIf="accountService.currentUser$ | async"
+    dropdown
+  >
+    <a
+      class="dropdown-toggle text-dark"
+      dropdownToggle
+      style="cursor: pointer; text-decoration: none"
+      >Welcome {{ currentUserName }}</a
+    >
+    <div class="dropdown-menu" *dropdownMenu>
+      <a class="dropdown-item" style="cursor: pointer">Edit Profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" style="cursor: pointer" (click)="logout()"
+        >Logout</a
+      >
+    </div>
+  </div>
+
+  <form
+    class="form-inline mt-2 mt-md-0"
+    *ngIf="(accountService.currentUser$ | async) === null"
+    (ngSubmit)="login()"
+    #f="ngForm"
+  >
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="model.username"
+      required
+      class="form-control mr-sm-2"
+      placeholder="Username"
+    />
+    <input
+      type="password"
+      name="password"
+      required
+      class="form-control mr-sm-2"
+      placeholder="Password"
+      [(ngModel)]="model.password"
+    />
+    <button class="btn btn-success my-2 my-sm-2" type="submit">Login</button>
+  </form>
+</nav>
