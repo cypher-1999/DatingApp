@@ -1,40 +1,38 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <a class="navbar-brand" [routerLink]="['']">DatingApp</a>
 
-  <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$ | async">
+  <ul class="navbar-nav mr-auto" >
+  <!-- <ul class="navbar-nav mr-auto"> -->
+    <ng-container *ngIf="accountService.currentUser$ | async">
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" [routerLink]="['matches']"
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['/members']"
         >Matches
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" [routerLink]="['lists']"
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['/lists']"
         >Lists</a
       >
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" [routerLink]="['messages']"
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['/messages']"
         >Messages</a
       >
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" (click)="logout()"
-        >Logout</a
-      >
-    </li> -->
+   </ng-container>
   </ul>
 
   <div
     class="dropdown mr-2"
-    *ngIf="accountService.currentUser$ | async"
+    *ngIf="accountService.currentUser$ | async as user"
     dropdown
   >
     <a
-      class="dropdown-toggle text-dark"
+      class="dropdown-toggle text-light"
       dropdownToggle
       style="cursor: pointer; text-decoration: none"
-      >Welcome {{ currentUserName }}</a
+      >Welcome {{ currentUserName | titlecase}}</a
     >
     <div class="dropdown-menu" *dropdownMenu>
       <a class="dropdown-item" style="cursor: pointer">Edit Profile</a>
